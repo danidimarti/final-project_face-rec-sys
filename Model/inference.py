@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import mediapipe as mp
 from keras.models import load_model
+	
 
 model = load_model('data/cnn_model.h5')
 label = np.load('data/labels.npy')

@@ -1,0 +1,6 @@
+*/.env
+*/fer2013.csv
+.env
+**/*.ipynb_checkpoints/
+**/__pycache__
+.vscode
