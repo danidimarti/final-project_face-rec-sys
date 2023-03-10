@@ -37,7 +37,7 @@ class EmotionProcessor:
 		##############################
 		frm = cv2.flip(frm, 1)
 
-		res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2RGB))
+		res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY))
 
 		lst = []
 

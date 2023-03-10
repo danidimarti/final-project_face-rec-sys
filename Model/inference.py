@@ -4,7 +4,7 @@ import mediapipe as mp
 from keras.models import load_model
 	
 
-model = load_model('data/cnn_model.h5')
+model = load_model('data/model.h5')
 label = np.load('data/labels.npy')
 
 holistic = mp.solutions.holistic
@@ -22,7 +22,7 @@ while True:
 
 	frm = cv2.flip(frm, 1)
 
-	res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2RGB))
+	res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY))
 
 
 	if res.face_landmarks:

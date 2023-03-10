@@ -3,11 +3,11 @@ from tensorflow.keras import models
 import cv2
 import numpy as np
 from mtcnn.mtcnn import MTCNN
-import trained_models 
+#import trained_models 
 
 #Importing the model
-trained_model = models.load_model('../trained_models/trained_vggface.h5', compile=False)
-trained_model.summary()
+model = models.load_model('data/model.h5', compile=False)
+model.summary()
 # prevents openCL usage and unnecessary logging messages
 cv2.ocl.setUseOpenCL(False)
 # dictionary which assigns each label an emotion (alphabetical order)
@@ -37,7 +37,7 @@ while True:
             cropped_img = cv2.resize(face, (96,96)) 
             cropped_img_expanded = np.expand_dims(cropped_img, axis=0)
             cropped_img_float = cropped_img_expanded.astype(float)
-            prediction = trained_model.predict(cropped_img_float)
+            prediction = model.predict(cropped_img_float)
             print(prediction)
             maxindex = int(np.argmax(prediction))
             cv2.putText(frame, emotion_dict[maxindex], (x1+20, y1-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
