@@ -1,9 +1,14 @@
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
+import streamlit as st
+from streamlit_webrtc import webrtc_streamer
+import mediapipe as mp 
+import webbrowser
+
 
 # load pre-trained emotion detection model
-model = load_model('data/cnn_model.h5')
+model = load_model('Model/data/cnn_model.h5')
 
 # define dictionary mapping labels to emotions
 emotion_dict = {
@@ -23,7 +28,7 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # load pre-trained Haar Cascade classifier for face detection
-    face_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('Model/data/haarcascade_frontalface_default.xml')
 
     # detect faces in grayscale image using the Haar Cascade classifier
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
@@ -65,3 +70,25 @@ while True:
 # release video capture and close all windows
 cap.release()
 cv2.destroyAllWindows()
+
+
+####---- Streamlit App ---- ####
+
+# Set page width to maximum
+st.set_page_config(page_title='Moodify', page_icon=':smiley:', layout='wide')
+
+# Insert header image
+st.image('imgs\streamlit-header_temp.png', use_column_width=False)
+
+# Center all elements of the page
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        max-width: 100%;
+        margin: auto;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
