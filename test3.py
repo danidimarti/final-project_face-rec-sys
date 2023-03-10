@@ -4,23 +4,21 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import numpy as np
 from tensorflow.keras.models import load_model
-import pandas as pd
+import os
 import time
+import pandas as pd
 
 
 st.image('imgs/streamlit-header_temp.png', use_column_width=True)
 
+#create global var for video frame
+#frame_window = st.image([])
+
 model = load_model('Model/data/cnn_model.h5')
-
-# Load CSV file containing links for different emotions
-df = pd.read_csv('Spotify\data\spotify_tracks.csv')
-
-# Create dictionary mapping emotions to links
-emotion_links_dict = dict(zip(df['label'], df['track_link']))
-
 
 def detect_emotion():
     frame_window = st.image([])
+
     # define dictionary mapping labels to emotions
     emotion_dict = {
         0: "Angry",
@@ -31,10 +29,8 @@ def detect_emotion():
     # initialize video capture from webcam
     cap = cv2.VideoCapture(0)
 
-    #dict_ = {}
-    new_list = []
-
-    #start_time = time.time()
+    dict_ = {}
+    start_time = time.time()
 
     while (cap.isOpened()):
         # read frame from video capture
@@ -68,8 +64,6 @@ def detect_emotion():
                 predictions = model.predict(roi_gray)
                 label = np.argmax(predictions)
                 emotion = emotion_dict[label]
-                new_list.append(emotion)
-
 
                 # draw rectangle around detected face 
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
@@ -79,29 +73,53 @@ def detect_emotion():
             # display the video stream with detected faces and predicted emotions
             frame_window.image(frame)
 
-            if len(new_list) > 30:
-                return emotion
-
-            # break loop if 'q' key is pressed
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            # break loop if 'q' key is pressed or time limit of 2 seconds is exceeded
+            if (cv2.waitKey(1) & 0xFF == ord('q')) or (time.time() - start_time >= 2):
                 break
         else:
             print('Could not read frame from video capture')
+
+    cap.release()
+    cv2.destroyAllWindows()
     return emotion
 
 
-
-#def main():
-    # Detect emotion from video stream
-    #detect_emotion()
-    
-
 if st.button('Moodify me'):
     emotion = detect_emotion()
-    st.write(f"The emotion is {emotion}!")
-    if emotion == 'Neutral':
-        import os
-        os.system('start https://www.youtube.com/watch?v=ZA9K0JMrbWg')
-    elif emotion == 'Sad':
-        os.system('start https://www.youtube.com/watch?v=ZA9K0JMrbWg')
+    st.write(f"It is a great day to feel {emotion}!")
+    
+    
+
+def open_link(emotion):
+    df = pd.read_csv('links.csv')
+    link = df[df['Emotion'] == emotion]['Link'].values[0]
+    st.write(f"Opening link for {emotion}: {link}")
+    # Open link here
+
+
+
+#1 set timer of two seconds to capture emotion
+#2.once emotion is capture, make the function stop (stop the loo)
+#3. save the result (detected emotion) to be used later.  
+
+
+# calculate 
+
+# 1. Make the function stop
+    # 1. After emotion is recognized
+    # 2. Calculate time until next emotion
+    # 3. If time is greater than X
+    # 4. Stop the loop: functions stops
+    # 5. You have a result
+
+# 2. Save it somwehere else and import it here
+# 3. debug the import
+# 4. Add the next step
+
+# Set page title and icon
+#st.set_page_config(page_title='Moodify Me', page_icon=':musical_note:')
+
+
+#st.header("Emotion Based Music Recommender")
+
 

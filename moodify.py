@@ -72,10 +72,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 
-####---- Streamlit App ---- ####
-
-# Set page width to maximum
-st.set_page_config(page_title='Moodify', page_icon=':smiley:', layout='wide')
 
 # Insert header image
 st.image('imgs\streamlit-header_temp.png', use_column_width=False)

@@ -302,3 +302,16 @@ if __name__ == '__main__':
 #st.header("Emotion Based Music Recommender")
 #header_image = cv2.imread('imgs/streamlit-header_temp.png')
 #st.image(header_image, use_column_width=True)
+
+
+if __name__ == '__main__':
+    main()
+
+
+if __name__ == '__main__':
+    detect_emotion()
+
+if emotion == 'Happy': 
+        st.write(f"It is a great day to feel {emotion}!")
+    elif emotion == 'Sad':
+        st.write(f"Sorry to hear that. I am here for you It is a great day to feel {emotion}!")
