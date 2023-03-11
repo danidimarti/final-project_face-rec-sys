@@ -90,8 +90,12 @@ def detect_emotion():
             # display the video stream with detected faces and predicted emotions
             frame_window.image(frame)
 
-            if len(new_list) > 15:
-                emotion = statistics.mode(non_neutral).lower()
+            if len(new_list) > 18:
+                non_neutral = [emotion for emotion in new_list if emotion != 'Neutral']
+                if len(non_neutral) == 0:
+                    emotion = 'neutral'
+                else:
+                    emotion = statistics.mode(non_neutral).lower()
                 return emotion
 
             # break loop if 'q' key is pressed

@@ -10,6 +10,7 @@ button.css-1ro8un7.edgvbvh9 {
     box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
     transition: all 0.2s ease;
     cursor: pointer;
+    
 }
 
 button.css-1ro8un7.edgvbvh9:hover {
@@ -22,5 +23,9 @@ background-color: black;
 }
 
 section.css-163ttbj.e1fqkh3o11 {
+    background-color: black;
+    }
+
+div.appview-container.css-1wrcr25.egzxvld4  {
     background-color: black;
     }
