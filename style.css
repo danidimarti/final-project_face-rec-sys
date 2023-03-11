@@ -1,0 +1,26 @@
+button.css-1ro8un7.edgvbvh9 {
+    background-color: #1DB954;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+button.css-1ro8un7.edgvbvh9:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 15px rgba(0,0,0,0.3);
+}
+
+div.css-1ope8sv.e1fqkh3o4 {
+background-color: black;
+}
+
+section.css-163ttbj.e1fqkh3o11 {
+    background-color: black;
+    }

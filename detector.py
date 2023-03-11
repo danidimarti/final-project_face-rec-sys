@@ -3,17 +3,28 @@ import streamlit as st
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import numpy as np
-from tensorflow.keras.models import load_model
+from tensorflow import keras
+from keras.layers import Dense
+from keras.models import Sequential, load_model
 import pandas as pd
 import time
+import os
+import statistics
+import webbrowser
 
 
-st.image('imgs/streamlit-header_temp.png', use_column_width=True)
+
 
 model = load_model('Model/data/cnn_model.h5')
 
 # Load CSV file containing links for different emotions
-df = pd.read_csv('Spotify\data\spotify_tracks.csv')
+df = pd.read_csv('Spotify/data/spotify_tracks.csv')
+
+# Create subsets for each label/emotion
+subsets = {}
+for label in df['label'].unique():
+    subset = df.loc[df['label'] == label]
+    subsets['sub_' + label] = subset
 
 # Create dictionary mapping emotions to links
 emotion_links_dict = dict(zip(df['label'], df['track_link']))
@@ -79,7 +90,8 @@ def detect_emotion():
             # display the video stream with detected faces and predicted emotions
             frame_window.image(frame)
 
-            if len(new_list) > 30:
+            if len(new_list) > 15:
+                emotion = statistics.mode(non_neutral).lower()
                 return emotion
 
             # break loop if 'q' key is pressed
@@ -89,19 +101,4 @@ def detect_emotion():
             print('Could not read frame from video capture')
     return emotion
 
-
-
-#def main():
-    # Detect emotion from video stream
-    #detect_emotion()
-    
-
-if st.button('Moodify me'):
-    emotion = detect_emotion()
-    st.write(f"The emotion is {emotion}!")
-    if emotion == 'Neutral':
-        import os
-        os.system('start https://www.youtube.com/watch?v=ZA9K0JMrbWg')
-    elif emotion == 'Sad':
-        os.system('start https://www.youtube.com/watch?v=ZA9K0JMrbWg')
 
