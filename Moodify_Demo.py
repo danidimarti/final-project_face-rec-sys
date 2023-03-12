@@ -25,9 +25,9 @@ if st.button('Moodify me', key="center_button"):
 
     # Display different message based on the detected emotion
     if emotion == 'happy':
-        st.subheader(f"It is a great day to feel {emotion}! I love that for you.")
+        st.subheader(f"It is a great day to feel {emotion}! I\'ve got just the jam for you.")
     elif emotion == 'sad':
-        st.subheader(f"Sorry to hear that you are {emotion}. Remember that there's always calm after a storm.")
+        st.subheader(f"Sorry to see that you are {emotion}. Remember that there's always calm after a storm.")
     elif emotion == 'angry':
         st.subheader(f"Let your {emotion} out. Just try not to break anything.")
     elif emotion == 'neutral':
