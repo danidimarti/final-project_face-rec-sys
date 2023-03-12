@@ -44,6 +44,8 @@ if st.button('Moodify me', key="center_button"):
     for i in range(3, 0, -1):
         time.sleep(1)
         countdown_text.write(f"Opening song in {i} seconds...")
+    # Remove the countdown message after the countdown is complete
+    countdown_text.empty()
     
     # Open the link
     webbrowser.open_new_tab(link)
