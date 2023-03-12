@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import matplotlib.pyplot as plt
+import base64
 
 st.markdown("<h1 style='color:#9FE1B4; font-family: serif;'>The CNN Model</h1>", unsafe_allow_html=True)
 
@@ -12,6 +13,7 @@ st.write(
     <br><br>The *pixel* column of the df contain the pixel values of each image. There total 96 pixel values associated with each image because each image is grey-scaled and of resolution 48x48.</div>",
     unsafe_allow_html=True
 )
+
 
 
 # Display an image from a URL
@@ -80,6 +82,17 @@ html_string = "<div style='font-size:1.2rem;'><ol><li>Shuffling and Stratificati
 
 # Display the HTML string in the Streamlit app
 st.write(html_string, unsafe_allow_html=True)
+
+file_ = open("imgs/training-model.gif", "rb")
+contents = file_.read()
+data_url = base64.b64encode(contents).decode("utf-8")
+file_.close()
+
+st.markdown(
+    f'<img src="data:image/gif;base64,{data_url}" alt="model-gif" width="695" height="385">',
+    unsafe_allow_html=True
+)
+
 
 st.write(
     "<div style='font-size:1.2rem'>"

@@ -91,11 +91,7 @@ def detect_emotion():
             frame_window.image(frame)
 
             if len(new_list) > 18:
-                non_neutral = [emotion for emotion in new_list if emotion != 'Neutral']
-                if len(non_neutral) == 0:
-                    emotion = 'neutral'
-                else:
-                    emotion = statistics.mode(non_neutral).lower()
+                emotion = statistics.mode(new_list).lower()
                 return emotion
 
             # break loop if 'q' key is pressed
