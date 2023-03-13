@@ -29,6 +29,11 @@ bullet_style = """
         
     }
 """
+
+with open('style.css') as f: 
+    st.markdown(f'<style>{f.read()} </style>', unsafe_allow_html=True)
+
+    
 st.markdown("<h1 style='color:#9FE1B4; font-family: serif;'>Spotify Data</h1>", unsafe_allow_html=True)
 
 st.markdown("<h3 style='color:#9FE1B4;'>Emotion labeled dataset from Spotify Api</h3>", unsafe_allow_html=True)

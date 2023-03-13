@@ -3,6 +3,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import base64
 
+
 # Define the CSS style for the container
 container_style = """
     .text-container {
@@ -28,6 +29,10 @@ bullet_style = """
         
     }
 """
+
+
+with open('style.css') as f: 
+    st.markdown(f'<style>{f.read()} </style>', unsafe_allow_html=True)
 
 st.markdown("<h1 style='color:#9FE1B4; font-family: serif;'>The CNN Model</h1>", unsafe_allow_html=True)
 
@@ -76,9 +81,15 @@ fer2013decision = f"{html_string}<br>I have decided to train my model using the 
 st.markdown(f'<div class="text-container"><style>{container_style}</style><div style="color:#FFDAB9; font-family: serif; font-size:1.5rem">Fer2013 summary analysis:</div>{fer2013decision}</div><br><br>', unsafe_allow_html=True)
 
 
-######### ------ CREATING THE MODEL ------------- ########
+######### ------ CREATING THE MODEL - WHY THIS MODEL ------------- ########
 st.markdown("<h2 style='color:#90EE90; font-family: serif;'>Creating the Model</h2>", unsafe_allow_html=True)
 
+whythismodel = "<div style='font-size:1.2rem;'><div></div> I choose CNN because, although it might require a bit more fine tuning than other models it is a more general purpose model that is less computationally expensive and it doesn't requires extensive amount data to the trained (e.g. OpenFace, FaceNet).</div>"
+
+
+st.markdown(f'<div class="bullet-points"><style>{bullet_style}</style><div style="color:#FFDAB9; font-family: serif; font-size:1.7rem">Why the CNN model?</div>{whythismodel}</div><br>', unsafe_allow_html=True)
+
+######### ------- STEPS ------------- ########
 steps = "<div style='font-size:1.2rem;'><ol type='1'><li>Ensure the data is compatible with the model needs: h:48 x w:48 x color:1 (greyscale) .</li><li>Label encode categories so they are compatible with the model.</li><li> Normalize the image arrays, because neural networks are highly sensitive to non-normalize data.</li><li>Stack the images so we can use mini-batch gradient descent as optimizer (system of small batches and feedback loops. It's less computationally efficient than SGD but more stable.)</li><li>Split the data into training and validation/test set.</li></ol></div>"
 
 
@@ -87,7 +98,7 @@ st.markdown(f'<div class="bullet-points"><style>{bullet_style}</style><div style
 
 ######----- MODEL SETTINGS ------ ######
 
-html_string = "<div style='font-size:1.2rem;'><ol><li>Shuffling and Stratification: split the data into random order and make sure that all classes are being represented in the split.</li><li>Model Operation Layers:<ol><li>Conv2D: applies filter to extract features that are spacially related</li><li>BatchNormalization: normalizes the inputs of the previous layer to speed training and improve performance</li><li>Dense: connected the neurons of the previous layers with the ones of the current layer</li><li>Dropout: randomly drops out some neurons during training to prevent overfitting</li></ol></li><li>Activation Function: ELU. applied to the output. allows for negative values to pass through the neural networks without being ignored (better performance). Avoids Relu problems where neurons can become dead and decrease in accuracy.</li><li>Callbacks: list of functions that will be called during the training to improve performance.<ol><li>EarlyStopping: avoids over-fitting</li><li>ReduceLROnPlateau: reduce learning rate when the validation accuracy plateaus.</li><li>ImageDataGenerator: applies changes to the image (e.g. rotations)</li></ol><li>Batch Size: 32</li><li>Epochs: 30</li><li>Optimizer: Adam. Commonly used for training images and speech rec.</li></li></ol></div>"
+html_string = "<div style='font-size:1.2rem;'><ol><li>Shuffling and Stratification: split the data into random order and make sure that all classes are being represented in the split.</li><li>Model Operation Layers:<ol><li>Conv2D: applies performance filter (250) to extract features that are spacially related</li><li>BatchNormalization: normalizes the inputs of the previous layer to speed training and improve performance</li><li>Dense: connected the neurons of the previous layers with the ones of the current layer</li><li>Dropout: randomly drops out some neurons during training to prevent overfitting</li></ol></li><li>Activation Function: ELU. applied to the output. allows for negative values to pass through the neural networks without being ignored (better performance). Avoids Relu problems where neurons can become dead and decrease in accuracy.</li><li>Callbacks: list of functions that will be called during the training to improve performance.<ol><li>EarlyStopping: avoids over-fitting</li><li>ReduceLROnPlateau: reduce learning rate when the validation accuracy plateaus.</li><li>ImageDataGenerator: applies changes to the image (e.g. rotations)</li></ol><li>Batch Size: 32</li><li>Epochs: 30</li><li>Optimizer: Adam. Commonly used for training images and speech rec.</li></li></ol></div>"
 
 st.markdown(f'<div class="bullet-points"><style>{bullet_style}</style><div style="color:#FFDAB9; font-family: serif; font-size:1.7rem">Model Settings:</div>{html_string}</div><br><br>', unsafe_allow_html=True)
 

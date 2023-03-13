@@ -2,6 +2,9 @@ import streamlit as st
 from PIL import Image
 import base64
 
+with open('style.css') as f: 
+    st.markdown(f'<style>{f.read()} </style>', unsafe_allow_html=True)
+
 st.markdown("<h1 style='color:#9FE1B4; font-family: serif;'> Moodify: the app that matches a song to your mood</h1>", unsafe_allow_html=True)
 #st.markdown("<h3 style='color:#9FE1B4; font-family: serif;'> Meet Moodify, the app that matches your jam to your mood</h3>", unsafe_allow_html=True)
 file_ = open("imgs/moodify_demo_gif_2.gif", "rb")
